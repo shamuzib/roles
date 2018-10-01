@@ -1,0 +1,10 @@
+- name: creating directories
+  file: path=/home/test/roles state=directory mode=0777 owner=test group=test
+- name: Install Apache WebServer
+  yum: pkg={{ redhat }} state=installed
+  when: ansible_os_family == 'RedHat'
+  notify: restart HTTPD
+- name: Install apache on Debian
+  apt: pkg={{ debian }} state=installed
+  when: ansible_os_family == 'Debian'
+  notify: restart APACHE2

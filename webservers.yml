@@ -1,0 +1,14 @@
+--- #Running Web Servers
+- hosts: all
+  remote_user: test
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  pre_tasks:
+  - name: Role start time
+    raw: date >> /home/test/roles/start.log
+  roles:
+  - webservers
+  post_tasks:
+  - name: Role end time
+    raw: date >> /home/test/roles/end.log
